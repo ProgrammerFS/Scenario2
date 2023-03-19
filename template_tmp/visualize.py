@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response, send_file
+from flask import Flask, request, make_response, send_file, render_template, redirect
 import io
 import base64
 import os
@@ -7,7 +7,16 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 from matplotlib_venn import venn2, venn2_circles
+import json
 matplotlib.use('Agg')
+global index
+index = 0
+global pulled
+pulled = 0
+global x
+x = {}
+global l
+l = []
 
 app = Flask(__name__)
 
@@ -50,6 +59,41 @@ def generate_venn_diagram():
     response.headers['Content-Type'] = 'text/html'
     return response
 
+@app.route("/quiz", methods=["GET", "POST"])
+def quiz():
+    global pulled, x, l, index
+    
+    if request.method == "GET":
+        
+        if pulled==0:
+            pulled = 1
+            f = open("./questions/1.json")
+            data = json.load(f)
+            for i in data["questions"]:
+                for j in i:
+                    l.append(j)
+                    x[j] = i[j]
+            question = l[index]
+            options = x[question]
+            return render_template("quiz.html", q = question, options = options)
+        else:
+            if index < len(l) or index == 0:
+                question = l[index]
+                options = x[question]
+                return render_template("quiz.html", q = question, options = options)
+            else:
+                return "Thank You"
+    if request.method == "POST":
+        if index < len(l) or index == 0:
+            answer = request.form["answer"]
+            print("answer :", answer)
+            index+=1
+            return redirect("/quiz")
+        else:
+            return "Thank you"
+
+
+
 if __name__ == '__main__':
-    app.run(port=9889)
+    app.run(port=9889, debug = True)
 
