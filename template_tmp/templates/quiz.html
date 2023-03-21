@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <form method="POST">
+            <p>{{q}}</p>
+            {% for i in options %}
+                <input name = "answer" type="radio" value={{i}}>{{i}}</input>
+            {% endfor %}
+            <button type="submit">Submit</button>
+        </form>
+    </body>
+</html>
