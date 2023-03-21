@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport", content="width=device-width, initial scale = 1.0">
+    <title>Visualisation</title>
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@3000;400;600&display=swap" rel="stylesheet">
+    
+    <!-- font awesome cdn link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudfare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    
+    <!-- custom css link -->
+    <link rel="stylesheet" href="./css/css.css">
+    
+    <style>
+        section{
+            padding: 0;
+            padding-top: 0;
+        }
+        
+        .home{
+            background-attachment: scroll;
+        }
+    </style>
+
+</head>
+<body>
+   
+   <!-- jquer cdn link -->
+    <script src="https://cdnjs.cloudfare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <!-- jquery custom link -->
+    <script src="./js/script.js"></script>
+        
+    <!-- welcome section start -->
+    
+    <section class="home" id="home">
+        <div class="box">
+            <h1>Venn-Diagram Generator</h1>
+        </div>
+        <form>
+            <label for="setA">Set A:</label>
+            <input type="text" id="setA" name="setA" placeholder="Enter comma-separated values">
+            
+            <label for="setB">Set B:</label>
+            <input type="text" id="setB" name="setB" placeholder="Enter comma-separated values">
+            
+            <label for="setRelation">Set Relation:</label>
+            <select id="setRelation" name="setRelation">
+                <option selected class="selected">Select Operation</option>
+                <option value="intersection">Intersection</option>
+                <option value="union">Union</option>
+                <option value="differenceAB">Difference A - B</option>
+                <option value="differenceBA">Difference B - A</option>
+            </select>
+            
+            <div class="button">
+                <input type="button" value="Input Data" onclick="generateVennDiagram()">
+                <input type="button" value="Display Venn Diagram" onclick="generateVennDiagram()">
+            </div>
+        </form>
+            
+        <div id="vennDiagramContainer">
+                <img id="vennDiagram" src="./static/images/venn.png" alt="Venn Diagram">
+        </div>
+
+    </section>
+    
+    <!--welcome section end -->
+   
+   
+   
+   
+   
+   
+   
+   
+    
+    
+    
+
+    <script>
+    function generateVennDiagram() {
+        var setA = document.getElementById("setA").value;
+        var setB = document.getElementById("setB").value;
+        var setRelation = document.getElementById("setRelation").value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://127.0.0.1:9888/generate_venn_diagram?setA=" + setA + "&setB=" + setB + "&setRelation=" + setRelation, true);
+        xhr.responseType = "text";
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var imagePath = xhr.responseText;
+                var vennDiagram = document.getElementById("vennDiagram");
+                vennDiagram.src = imagePath + '?time=' + new Date().getTime(); // 添加时间戳
+            }
+        };
+        xhr.send();
+        location.reload();
+    }
+    </script>
+
+</body>
+</html
