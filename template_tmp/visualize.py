@@ -64,7 +64,7 @@ def generate_venn_diagram():
     # Construct the HTML code containing the image
     image_html = f'<img src="/{filepath}" alt="venn diagram">'
 
-    # 将图像添加到HTTP响应中
+    # Adding images to HTTP responses
     response = make_response(image_html)
     response.headers['Content-Type'] = 'text/html'
     return response
