@@ -82,40 +82,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Welcome Page</title>
-  <style>
-    body {
-      background-color: #F5F5F5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-    h1 {
-      font-size: 3rem;
-      margin-top: 0;
-    }
-    button {
-      font-size: 2rem;
-      padding: 20px 40px;
-      margin: 10px;
-      border-radius: 10px;
-      background-color: #1E90FF;
-      color: #FFF;
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s ease-in-out;
-    }
-    button:hover {
-      background-color: #3CB371;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport", content="width=device-width, initial scale = 1.0">
+  <title>Welcome</title>
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@3000;400;600&display=swap" rel="stylesheet">
+    
+    <!-- font awesome cdn link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudfare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    
+    <!-- custom css link -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/css.css') }}">
+    
+    <style>
+        .home .row-flex{
+            display: flex;
+            flex-flow: row;
+        }
+    </style>
+  
 </head>
 <body>
-  <h1>Welcome to our learning platform</h1>
-  <button onclick="location.href='/student'">Student</button>
-  <button onclick="location.href='/teacher'">Teacher</button>
+    
+    <!-- jquer cdn link -->
+    <script src="https://cdnjs.cloudfare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <!-- jquery custom link -->
+    <script src="./js/script.js"></script>
+    
+    <!-- welcome section start -->
+    <section class="home" id="home">
+        <h1>Practice Set Theory</h1>
+        <p>Sharpen your skills, Assign homework and get updates - All in one place
+        <br><br> <b>Get Started Now! </b>
+        </p>
+        
+        <div class="row-flex">
+            <a href="/student"><button class="btn">Students</button></a> &emsp;&emsp;
+            <a href="/teacher"><button class="btn">Teachers</button></a>
+        </div>
+        
+    </section>
+    
+    <!--welcome section end -->
+
 </body>
 </html>
-
