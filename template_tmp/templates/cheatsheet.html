@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport", content="width=device-width, initial scale = 1.0">
-  <title>Student Section</title>
+  <title>Cheat Sheet</title>
     
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@3000;400;600&display=swap" rel="stylesheet">
@@ -12,7 +12,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudfare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     
     <!-- custom css link -->
-    <link rel="stylesheet" href="./css/css.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/css.css') }}">
+    
+    <style>
+        section{
+            max-height: 100vh;
+            max-width: 100wh;
+            padding: 0;
+            padding-top: 0;
+        }
+        
+        .home{
+            background: url(./img/2.jpg) no-repeat;
+            background-position: top;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        
+        .home h1{
+            color: #f0f0f0;
+        }
+        
+    </style>
   
 </head>
 <body>
@@ -25,14 +46,9 @@
     
     <!-- welcome section start -->
     <section class="home" id="home">
-        <h1>Student Practice Area</h1>
-        <p>Choose the option to sharpen your skills
-        <br><br> <b>Get Started Now! </b>
-        </p>
         
-            <a href="./visualization.html"><button class="btn">Visualisation</button></a>
-            <a href="#"><button class="btn">Quiz</button></a>
-            <a href="./cheatsheet.html", target="_blank"><button class="btn">Cheat Sheet</button></a>
+            <h1>Cheat Sheet</h1>
+            <iframe src="{{ url_for('static',filename='cheatsheet.pdf') }}"></iframe>
         
     </section>
     

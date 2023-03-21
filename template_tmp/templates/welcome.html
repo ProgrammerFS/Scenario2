@@ -93,7 +93,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudfare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     
     <!-- custom css link -->
-    <link rel="stylesheet" href="./css/css.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/css.css') }}">
     
     <style>
         .home .row-flex{
@@ -119,8 +119,8 @@
         </p>
         
         <div class="row-flex">
-            <a href="./student.html"><button class="btn">Students</button></a> &emsp;&emsp;
-            <a href="./teacher"><button class="btn">Teachers</button></a>
+            <a href="/student"><button class="btn">Students</button></a> &emsp;&emsp;
+            <a href="/teacher"><button class="btn">Teachers</button></a>
         </div>
         
     </section>
