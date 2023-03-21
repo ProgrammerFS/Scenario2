@@ -32,16 +32,16 @@ def student():
 
 @app.route('/generate_venn_diagram', methods=['GET','POST'])
 def generate_venn_diagram():
-    # 从HTTP请求中获取参数
+    # Get parameters from HTTP requests
     setA = request.args.get('setA', '')
     setB = request.args.get('setB', '')
     setRelation = request.args.get('setRelation', 'intersection')
 
-    # 解析Set A和Set B
+    # Resolve Set A and Set B
     setA_values = set(setA.split(","))
     setB_values = set(setB.split(","))
 
-    # 根据Set Relation绘制Venn图表
+    # Venn diagramming from Set Relation
     fig, ax = plt.subplots()
     if setRelation == "intersection":
         venn2([setA_values, setB_values], set_colors=('#4F9D9D', '#F1948A'), set_labels=('Set A', 'Set B'), ax=ax)
@@ -52,16 +52,16 @@ def generate_venn_diagram():
     elif setRelation == "differenceBA":
         venn2([setA_values, setB_values - setA_values], set_colors=('#4F9D9D', '#F1948A'), set_labels=('Set A', 'Set B - Set A'), ax=ax)
 
-    # 保存图像到静态文件夹中
+    # Save images to a static folder
     os.makedirs('static/images', exist_ok=True)
     filename = 'venn.png'
     filepath = os.path.join('static', 'images', filename)
     fig.savefig(filepath, format='png')
 
-    # 清空图表以释放内存
+    # Clear the chart to free up memory
     plt.clf()
 
-    # 构造包含图像的HTML代码
+    # Construct the HTML code containing the image
     image_html = f'<img src="/{filepath}" alt="venn diagram">'
 
     # 将图像添加到HTTP响应中
