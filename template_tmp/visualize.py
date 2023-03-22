@@ -20,7 +20,8 @@ global l
 l = []
 global answers
 answers = []
-
+global score
+score = 0
 
 app = Flask(__name__)
 matplotlib.use('Agg')
@@ -43,7 +44,11 @@ def write_users(username, password):
 
 @app.route("/")
 def home():
-    return render_template("welcome.html")
+    try:
+        y = session["name"]
+        return render_template("welcome.html")
+    except:
+        return redirect("/login")
 
 @app.route("/student")
 def student():
@@ -79,9 +84,14 @@ def generate_venn_diagram():
     else:
         return redirect("/login")
 
+@app.route("/student/quizmenu", methods=["GET", "POST"])
+def quizmenu():
+    return render_template("quizmenu.html")
+    pass
+
 @app.route("/student/quiz", methods=["GET", "POST"])
 def quiz():
-    global pulled, x, l, index,answers
+    global pulled, x, l, index,answers, score
     if session["name"]!=False:
         if request.method == "GET":
             
@@ -102,15 +112,17 @@ def quiz():
                     options = x[question]
                     return render_template("quiz.html", q = question, options = options)
                 else:
-                    incorrect = []
-                    fa = open("./questions/answers.json")
+                    fa = open("./questions/1_answers.json")
                     data = json.load(fa)
+                    incorrect = [1 for i in range(len(data["answers"]))]
                     if data["answers"] != answers:
-                        for i in data["answers"]:
-                            if i not in answers:
-                                incorrect.append(i)
-                    # if incorrect!=[]:
-                    #     return render_template("incorrect.html")
+                        for i in range(len(answers)):
+                            if data["answers"][i] not in answers:
+                                incorrect[i] =  answers[i]
+                    score = abs(incorrect.count(1)*100/len(l))
+
+                    if incorrect!=[]:
+                        return render_template("incorrect.html", inc = incorrect, l=l, answers=data["answers"], length=len(l), y = incorrect.count(1))
                     return "Thank You"
         if request.method == "POST":
             if index < len(l) or index == 0:
@@ -172,6 +184,10 @@ def hello():
     else:
         return redirect("/login")
 
+@app.route("/student/challenge")
+def challenge():
+    return render_template("challenge.html")
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -203,6 +219,10 @@ def signup():
             return redirect("/")
 
     return render_template('signup.html',  message = None)
+
+@app.route("/student/leaderboard")
+def leaderboard():
+    return render_template("leaderboard.html", score=score)
 
 @app.route("/logout")
 def logout():
