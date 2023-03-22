@@ -30,44 +30,29 @@ def home():
 def student():
     return render_template("student.html")
 
-@app.route('/generate_venn_diagram', methods=['GET','POST'])
+@app.route('/visualization', methods=['GET','POST'])
 def generate_venn_diagram():
-    # 从HTTP请求中获取参数
-    setA = request.args.get('setA', '')
-    setB = request.args.get('setB', '')
-    setRelation = request.args.get('setRelation', 'intersection')
+    if request.method == "GET":
+        return render_template("visualization.html")
+    else:
+        setA = request.form["setA"]
+        setB = request.form["setB"]
+        setRelation = request.form["setRelation"]
+        setA_values = set(setA.split(","))
+        setB_values = set(setB.split(","))
+        fig, ax = plt.subplots()
+        if setRelation == "intersection" or setRelation=="union":
+            venn2([setA_values, setB_values])
+        elif setRelation == "differenceAB":
+            venn2([setA_values - setB_values, setB_values], set_colors=('#4F9D9D', '#F1948A'), set_labels=('Set A - Set B', 'Set B'), ax=ax)
+        elif setRelation == "differenceBA":
+            venn2([setA_values, setB_values - setA_values], set_colors=('#4F9D9D', '#F1948A'), set_labels=('Set A', 'Set B - Set A'), ax=ax)
 
-    # 解析Set A和Set B
-    setA_values = set(setA.split(","))
-    setB_values = set(setB.split(","))
-
-    # 根据Set Relation绘制Venn图表
-    fig, ax = plt.subplots()
-    if setRelation == "intersection":
-        venn2([setA_values, setB_values], set_colors=('#4F9D9D', '#F1948A'), set_labels=('Set A', 'Set B'), ax=ax)
-    elif setRelation == "union":
-        venn2([setA_values, setB_values], set_colors=('#4F9D9D', '#F1948A'), set_labels=('Set A', 'Set B'), alpha=0.5, ax=ax)
-    elif setRelation == "differenceAB":
-        venn2([setA_values - setB_values, setB_values], set_colors=('#4F9D9D', '#F1948A'), set_labels=('Set A - Set B', 'Set B'), ax=ax)
-    elif setRelation == "differenceBA":
-        venn2([setA_values, setB_values - setA_values], set_colors=('#4F9D9D', '#F1948A'), set_labels=('Set A', 'Set B - Set A'), ax=ax)
-
-    # 保存图像到静态文件夹中
-    os.makedirs('static/images', exist_ok=True)
-    filename = 'venn.png'
-    filepath = os.path.join('static', 'images', filename)
-    fig.savefig(filepath, format='png')
-
-    # 清空图表以释放内存
-    plt.clf()
-
-    # 构造包含图像的HTML代码
-    image_html = f'<img src="/{filepath}" alt="venn diagram">'
-
-    # 将图像添加到HTTP响应中
-    response = make_response(image_html)
-    response.headers['Content-Type'] = 'text/html'
-    return response
+        filename = 'venn1.png'
+        filepath = os.path.join('static', 'img', filename)
+        fig.savefig(filepath, format='png')
+        plt.clf()
+        return render_template("visualized.html")
 
 @app.route("/student/quiz", methods=["GET", "POST"])
 def quiz():

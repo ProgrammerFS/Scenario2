@@ -40,14 +40,14 @@
         <div class="box">
             <h1>Venn-Diagram Generator</h1>
         </div>
-        <form>
-            <label for="setA">Set A:</label>
+        <form method="POST">
+            <label name="setA">Set A:</label>
             <input type="text" id="setA" name="setA" placeholder="Enter comma-separated values">
             
-            <label for="setB">Set B:</label>
+            <label name="setB">Set B:</label>
             <input type="text" id="setB" name="setB" placeholder="Enter comma-separated values">
             
-            <label for="setRelation">Set Relation:</label>
+            <label name="setRelation">Set Relation:</label>
             <select id="setRelation" name="setRelation">
                 <option selected class="selected">Select Operation</option>
                 <option value="intersection">Intersection</option>
@@ -57,13 +57,14 @@
             </select>
             
             <div class="button">
-                <input type="button" value="Input Data" onclick="generateVennDiagram()">
-                <input type="button" value="Display Venn Diagram" onclick="generateVennDiagram()">
+                <!-- <input type="button" value="Input Data" onclick="generateVennDiagram()">
+                <input type="button" value="Display Venn Diagram" onclick="generateVennDiagram()"> -->
+                <button type="submit">Submit</button>
             </div>
         </form>
             
         <div id="vennDiagramContainer">
-                <img id="vennDiagram" src="./static/images/venn.png" alt="Venn Diagram">
+                <img id="vennDiagram" src="./static/img/venn.png" alt="Venn Diagram">
         </div>
 
     </section>
@@ -88,7 +89,7 @@
         var setRelation = document.getElementById("setRelation").value;
 
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://127.0.0.1:9888/generate_venn_diagram?setA=" + setA + "&setB=" + setB + "&setRelation=" + setRelation, true);
+        xhr.open("POST", "http://127.0.0.1:9888/generate_venn_diagram?setA=" + setA + "&setB=" + setB + "&setRelation=" + setRelation, true);
         xhr.responseType = "text";
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
