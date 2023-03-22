@@ -30,44 +30,29 @@ def home():
 def student():
     return render_template("student.html")
 
-@app.route('/generate_venn_diagram', methods=['GET','POST'])
+@app.route('/visualization', methods=['GET','POST'])
 def generate_venn_diagram():
-    # Get parameters from HTTP requests
-    setA = request.args.get('setA', '')
-    setB = request.args.get('setB', '')
-    setRelation = request.args.get('setRelation', 'intersection')
+    if request.method == "GET":
+        return render_template("visualization.html")
+    else:
+        setA = request.form["setA"]
+        setB = request.form["setB"]
+        setRelation = request.form["setRelation"]
+        setA_values = set(setA.split(","))
+        setB_values = set(setB.split(","))
+        fig, ax = plt.subplots()
+        if setRelation == "intersection" or setRelation=="union":
+            venn2([setA_values, setB_values])
+        elif setRelation == "differenceAB":
+            venn2([setA_values - setB_values, setB_values], set_colors=('#4F9D9D', '#F1948A'), set_labels=('Set A - Set B', 'Set B'), ax=ax)
+        elif setRelation == "differenceBA":
+            venn2([setA_values, setB_values - setA_values], set_colors=('#4F9D9D', '#F1948A'), set_labels=('Set A', 'Set B - Set A'), ax=ax)
 
-    # Resolve Set A and Set B
-    setA_values = set(setA.split(","))
-    setB_values = set(setB.split(","))
-
-    # Venn diagramming from Set Relation
-    fig, ax = plt.subplots()
-    if setRelation == "intersection":
-        venn2([setA_values, setB_values], set_colors=('#4F9D9D', '#F1948A'), set_labels=('Set A', 'Set B'), ax=ax)
-    elif setRelation == "union":
-        venn2([setA_values, setB_values], set_colors=('#4F9D9D', '#F1948A'), set_labels=('Set A', 'Set B'), alpha=0.5, ax=ax)
-    elif setRelation == "differenceAB":
-        venn2([setA_values - setB_values, setB_values], set_colors=('#4F9D9D', '#F1948A'), set_labels=('Set A - Set B', 'Set B'), ax=ax)
-    elif setRelation == "differenceBA":
-        venn2([setA_values, setB_values - setA_values], set_colors=('#4F9D9D', '#F1948A'), set_labels=('Set A', 'Set B - Set A'), ax=ax)
-
-    # Save images to a static folder
-    os.makedirs('static/images', exist_ok=True)
-    filename = 'venn.png'
-    filepath = os.path.join('static', 'images', filename)
-    fig.savefig(filepath, format='png')
-
-    # Clear the chart to free up memory
-    plt.clf()
-
-    # Construct the HTML code containing the image
-    image_html = f'<img src="/{filepath}" alt="venn diagram">'
-
-    # Adding images to HTTP responses
-    response = make_response(image_html)
-    response.headers['Content-Type'] = 'text/html'
-    return response
+        filename = 'venn1.png'
+        filepath = os.path.join('static', 'img', filename)
+        fig.savefig(filepath, format='png')
+        plt.clf()
+        return render_template("visualized.html")
 
 @app.route("/student/quiz", methods=["GET", "POST"])
 def quiz():

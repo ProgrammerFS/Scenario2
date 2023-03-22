@@ -5,7 +5,7 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-os.getenv('/Users/andywu/Documents/Uni_programming/Scenario_2/test/.env')
+os.getenv('/test/.env')
 
 app = Flask(__name__)
 app.config['MAIL_SERVER']=os.getenv('MAIL_SERVER')
