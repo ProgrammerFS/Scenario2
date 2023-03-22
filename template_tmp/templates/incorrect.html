@@ -4,6 +4,14 @@
         <title>incorrect answers</title>
     </head>
     <body>
-        <p></p>
+        {% for i in range(length)%}
+        {% if inc[i] != 1 %}
+            <p>Question : {{l[i]}}</p>
+            <p>Your Answer : {{inc[i]}}</p>
+            <p>Correct Answe : {{answers[i]}}</p>
+        {% endif %}
+        {% endfor %}
+        <p>Final Score = {{y}}/{{length}}</p>
+        <a href="/student/leaderboard"><button></button></a>
     </body>
 </html>
