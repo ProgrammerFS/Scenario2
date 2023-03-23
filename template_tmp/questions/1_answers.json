@@ -1,5 +1,1 @@
-{
-    "answers": ["{3,5,9}", "{3,5}", "{2,4,6}", "{2,4,6,8,10,12,14}"],
-    "question2_answers": ["(A ∩ B’ ∩ C’)’", "(A ∩ B) ∩ (B ∩ C) ∩ (A U C)"],
-    "question3_answers": []
-}   
+{"answers": ["{3,5,9}", "{3,5}", "{2,4,6}", "{2,4,6,8,10,12,14}", ""], "question2_answers": ["(A \u00e2\u02c6\u00a9 B\u00e2\u20ac\u2122 \u00e2\u02c6\u00a9 C\u00e2\u20ac\u2122)\u00e2\u20ac\u2122", "(A \u00e2\u02c6\u00a9 B) \u00e2\u02c6\u00a9 (B \u00e2\u02c6\u00a9 C) \u00e2\u02c6\u00a9 (A U C)"], "question3_answers": []}

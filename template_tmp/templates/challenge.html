@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport", content="width=device-width, initial scale = 1.0">
-    <title>Visualisation</title>
+    <title>Upload Challenge question</title>
     
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@3000;400;600&display=swap" rel="stylesheet">
@@ -23,6 +23,10 @@
         .home{
             background-attachment: scroll;
         }
+        
+        .btn{
+            margin-bottom: 3rem;
+        }
     </style>
 
 </head>
@@ -37,11 +41,13 @@
     <!-- welcome section start -->
     
     <section class="home" id="home">
-        <h1> Upload Question </h1>
+       <div class="box">
+            <h1> Upload Question </h1>
+        </div>
         <form method="POST">
-            <p>Please enter the question</p>
-            <input type="text" name="question"/>
-            <p>Enter the options for the question</p>
+            <p><strong>Please enter the question</strong></p>
+            <input style="width: 660px;" type="text" name="question"/>
+            <p><strong>Enter the options for the question</strong></p>
             <p>option 1</p>
             <input type="text" name="option1" />
             <p>option 2</p>
@@ -50,12 +56,13 @@
             <input type="text" name="option3" />
             <p>option 4</p>
             <input type="text" name="option4" />
-            <p>Correct answer</p>
+            <p><strong>Correct answer</strong></p>
             <input type="text" name="answer"/>
             <input type="text" name="Friend" placeholder="Enter Friend's name" required/>
-            <button type="submit">Submit</button>
+            <button class="btn" type="submit">Submit</button>
         </form>
-
+        
+      
     </section>
     
     <!--welcome section end -->
