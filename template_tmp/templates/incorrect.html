@@ -1,17 +1,94 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>incorrect answers</title>
-    </head>
-    <body>
-        {% for i in range(length)%}
-        {% if inc[i] != 1 %}
-            <p>Question : {{l[i]}}</p>
-            <p>Your Answer : {{inc[i]}}</p>
-            <p>Correct Answe : {{answers[i]}}</p>
-        {% endif %}
-        {% endfor %}
-        <p>Final Score = {{y}}/{{length}}</p>
-        <a href="/student/leaderboard"><button></button></a>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport", content="width=device-width, initial scale = 1.0">
+  <title>Feedback</title>
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@3000;400;600&display=swap" rel="stylesheet">
+    
+    <!-- font awesome cdn link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudfare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    
+    <!-- custom css link -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/css.css') }}">
+    
+    <style>
+        *{
+            margin: revert;
+        }
+        
+        html{
+            box-sizing: border-box;
+        }
+        
+        body{
+            background: url(../static/img/welcome1.jpg) no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        @media only screen and (max-width: 60em){
+            body{
+                padding: 3rem;
+            }
+            
+            .grid{
+                grid-gap: 3rem;
+            }
+        }
+    </style>
+  
+</head>
+<body>
+    
+    <!-- jquer cdn link -->
+    <script src="https://cdnjs.cloudfare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <!-- jquery custom link -->
+    <script src="./js/script.js"></script>
+    
+    
+    
+    
+    <!-- cards section start -->
+    <div class="grid-prop">
+
+    {% for i in range(length)%}
+    {% if inc[i] != 1 %}
+    <div class="grid">
+        <div class="grid-item">
+            <div class="card">
+                <!--<img class="card-img" src="../static/img/2.jpg" alt="dark_img"> -->
+                <div class="card-content">
+
+                        <h1 class="card-header">{{l[i]}}</h1>
+                    
+                    
+                    <p class="card-text">
+                        Your Answer : {{inc[i]}} <br>
+                        Correct Answer : {{answers[i]}}
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    </div>
+
+    <!--cards section end -->
+    
+    
+    
+    
+    <p> <center class="score"> Final Score = {{y}}/{{length}} </center></p>
+    <center><a href="/student/leaderboard"><button class="btn"> See Leaderboard </button></a></center>
+    
+    <br>
+    <br>
+</body>
 </html>

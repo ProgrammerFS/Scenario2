@@ -1,12 +1,38 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Hello</title>
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport", content="width=device-width, initial scale = 1.0">
+  <title>Quiz Menu</title>
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@3000;400;600&display=swap" rel="stylesheet">
+    
+    <!-- font awesome cdn link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudfare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    
+    <!-- custom css link -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/css.css')}}">
+  
+</head>
+<body>
+    
+    <!-- jquer cdn link -->
+    <script src="https://cdnjs.cloudfare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <!-- jquery custom link -->
+    <script src="./js/script.js"></script>
+    
+    <!-- welcome section start -->
+    <section class="home" id="home">
         <h1>Quiz Menu</h1>
-        <a href="/student/quiz"><button>Quiz</button></a>
-        <a href="/student/challenge"><button>Challenge a Friend!</button></a>
-        <a href="/student/leaderboard"><button>View Leaderboard</button></a>
-    </body>
+        
+        <a href="/student/quiz"><button class="btn">Quiz</button></a>
+        <a href="/student/challenge"><button class="btn">Challenge a Friend!</button></a>
+        <a href="/student/leaderboard"><button class="btn">View Leaderboard</button></a>
+    </section>
+    
+    <!--welcome section end -->
+
+</body>
 </html>

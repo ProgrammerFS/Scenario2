@@ -1,12 +1,52 @@
 <!DOCTYPE html>
 <html>
-    <head>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport", content="width=device-width, initial scale = 1.0">
+    <title>Upload Question</title>
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@3000;400;600&display=swap" rel="stylesheet">
+    
+    <!-- font awesome cdn link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudfare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    
+    <!-- custom css link -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/css.css') }}">
+    
+    <style>
+        section{
+            padding: 0;
+            padding-top: 0;
+        }
+        
+        .home{
+            background-attachment: scroll;
+        }
+        
+        .btn{
+            margin-bottom: 3rem;
+        }
+    </style>
 
-    </head>
-    <body>
+</head>
+<body>
+   
+   <!-- jquer cdn link -->
+    <script src="https://cdnjs.cloudfare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <!-- jquery custom link -->
+    <script src="./js/script.js"></script>
+        
+    <!-- welcome section start -->
+    
+    <section class="home" id="home">
+       <div class="box">
+            <h1> Upload Question </h1>
+        </div>
         <form method="POST">
             <p>Please enter the question</p>
-            <input type="text" name="question"/>
+            <input style="width: 660px;" type="text" name="question"/>
             <p>Enter the options for the question</p>
             <p>option 1</p>
             <input type="text" name="option1" />
@@ -18,7 +58,12 @@
             <input type="text" name="option4" />
             <p>Correct answer</p>
             <input type="text" name="answer"/>
-            <button type="submit">Submit</button>
+            <button class="btn" type="submit">Submit</button>
         </form>
-    </body>
-</html>
+        <a href="/"><button class="btn">Back</button></a>
+
+    </section>
+    
+    <!--welcome section end -->
+</body>
+</html
