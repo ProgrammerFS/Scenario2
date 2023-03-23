@@ -263,5 +263,7 @@ def logout():
     return "Logged out succesfully"
 
 if __name__ == '__main__':
+    print(os.getcwd())
     app.run(port=9889, debug = True)
+    
 
