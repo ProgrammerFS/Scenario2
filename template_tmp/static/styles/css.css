@@ -140,6 +140,16 @@ section{
     color: #666;
 }
 
+.home .row-flex{
+            display: flex;
+            flex-flow: row;
+}
+
+.home h2{
+    font-size: 2.5rem;
+    color: #666;
+}
+
 .home p{
     font-size: 1.9rem;
     color: #999;
@@ -240,9 +250,70 @@ section{
 
 #vennDiagramContainer{
     align-items: center;
-    margin-top: 30px;
+    margin-top: 5px;
 }
 
 #vennDiagram{
     max-width: 80%;
+}
+
+.grid-prop{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+.grid{
+    display: grid;
+    width: 90rem;
+    grid-gap: 6rem;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    align-items: start;
+    margin: 20px;
+}
+
+.grid-item{
+    background-color: #fff;
+    border-radius: .4rem;
+    overflow: hidden;
+    box-shadow: 0 3rem 6rem rgba(0,0,0,.5);
+    cursor: pointer;
+    transition: .2s;
+}
+
+.grid-item:hover{
+    transform: translateY(-.5%);
+    box-shadow: 0 4rem 8rem rgba(0,0,0,.8);
+}
+
+.card-img{
+    display: block;
+    width: 100%;
+    height: 20rem;
+    object-fit: cover;
+}
+
+.card-content{
+    padding: 3rem;
+}
+
+.card-header{
+    font-size: 2rem;
+    font-weight: 500;
+    color: #0d0d0d;
+    margin-bottom: 1.5rem;
+}
+
+.card-text{
+    font-size: 1.6rem;
+    letter-spacing: .1rem;
+    line-height: 1.7;
+    color: #3d3d3d;
+    margin-bottom: 2.5rem;
+}
+
+.score{
+    font-size: 1.9rem;
+    color: black;
 }

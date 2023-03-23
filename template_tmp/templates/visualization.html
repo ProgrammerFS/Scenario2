@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudfare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     
     <!-- custom css link -->
-    <link rel="stylesheet" href="./css/{{ url_for('static',filename='styles/css.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/css.css') }}">
     
     <style>
         section{
@@ -59,13 +59,16 @@
             <div class="button">
                 <!-- <input type="button" value="Input Data" onclick="generateVennDiagram()">
                 <input type="button" value="Display Venn Diagram" onclick="generateVennDiagram()"> -->
-                <button type="submit">Submit</button>
+                <button class="btn" type="submit">Submit</button> <br>
+                
             </div>
         </form>
-            
+            <a href="/student"><button class="btn">Back</button></a>
+        
         <div id="vennDiagramContainer">
                 <img id="vennDiagram" src="./static/img/venn.png" alt="Venn Diagram">
         </div>
+        
 
     </section>
     
