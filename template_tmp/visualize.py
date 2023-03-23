@@ -87,7 +87,37 @@ def generate_venn_diagram():
 @app.route("/student/quizmenu", methods=["GET", "POST"])
 def quizmenu():
     return render_template("quizmenu.html")
-    pass
+
+@app.route("/teacher", methods=["GET", "POST"])
+def teacher():
+    if request.method == "GET":
+        return render_template("question_upload.html")
+    else:
+            form = request.form
+            question = form.get("question")
+            option1 = form.get("option1")
+            option2 = form.get("option2")
+            option3 = form.get("option3")
+            option4 = form.get("option4")
+            answer = form.get("answer")
+            fa = open("./questions/answers.json")
+            answers = json.load(fa)
+            answers["answers"].append(answer)
+            fa.close()
+            fa = open("./questions/answers.json", "w")
+            answer_obj = json.dumps(answers)
+            fa.write(answer_obj)
+            fa.close()
+            f = open("./questions/1.json")
+            data = json.load(f)
+            d = {question : [option1, option2, option3, option4]}
+            data["questions1"].append(d)
+            f.close()
+            f = open("./questions/1.json", "w")
+            data_obj = json.dumps(data)
+            f.write(data_obj)
+            f.close()
+            return render_template("question_upload.html")
 
 @app.route("/student/quiz", methods=["GET", "POST"])
 def quiz():
@@ -135,39 +165,39 @@ def quiz():
         return redirect("/login")
 
 
-@app.route("/upload", methods=["GET", "POST"])
-def upload():
-    if session["name"]!=False:
-        if request.method == "GET":
-            return render_template("question_upload.html")
-        else:
-            form = request.form
-            question = form.get("question")
-            option1 = form.get("option1")
-            option2 = form.get("option2")
-            option3 = form.get("option3")
-            option4 = form.get("option4")
-            answer = form.get("answer")
-            fa = open("./questions/answers.json")
-            answers = json.load(fa)
-            answers["answers"].append(answer)
-            fa.close()
-            fa = open("./questions/answers.json", "w")
-            answer_obj = json.dumps(answers)
-            fa.write(answer_obj)
-            fa.close()
-            f = open("./questions/1.json")
-            data = json.load(f)
-            d = {question : [option1, option2, option3, option4]}
-            data["questions1"].append(d)
-            f.close()
-            f = open("./questions/1.json", "w")
-            data_obj = json.dumps(data)
-            f.write(data_obj)
-            f.close()
-            return render_template("question_upload.html")
-    else:
-        return redirect("/login")
+# @app.route("/upload", methods=["GET", "POST"])
+# def upload():
+#     if session["name"]!=False:
+#         if request.method == "GET":
+#             return render_template("question_upload.html")
+#         else:
+#             form = request.form
+#             question = form.get("question")
+#             option1 = form.get("option1")
+#             option2 = form.get("option2")
+#             option3 = form.get("option3")
+#             option4 = form.get("option4")
+#             answer = form.get("answer")
+#             fa = open("./questions/answers.json")
+#             answers = json.load(fa)
+#             answers["answers"].append(answer)
+#             fa.close()
+#             fa = open("./questions/answers.json", "w")
+#             answer_obj = json.dumps(answers)
+#             fa.write(answer_obj)
+#             fa.close()
+#             f = open("./questions/1.json")
+#             data = json.load(f)
+#             d = {question : [option1, option2, option3, option4]}
+#             data["questions1"].append(d)
+#             f.close()
+#             f = open("./questions/1.json", "w")
+#             data_obj = json.dumps(data)
+#             f.write(data_obj)
+#             f.close()
+#             return render_template("question_upload.html")
+#     else:
+#         return redirect("/login")
 
 
 @app.route("/visualization")
@@ -184,9 +214,12 @@ def hello():
     else:
         return redirect("/login")
 
-@app.route("/student/challenge")
+@app.route("/student/challenge", methods=["GET", "POST"])
 def challenge():
-    return render_template("challenge.html")
+    if request.method == "GET":
+        return render_template("challenge.html")
+    else:
+        return redirect("/student/quizmenu")
 
 
 @app.route('/login', methods=['GET', 'POST'])
