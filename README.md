@@ -8,5 +8,5 @@ For this project, we used **Flask** to develop the web application in Python. Ad
 
 ​	Run file `run.py` or type `python3 run.py` in the terminal.
 
-​	Then, enter `http://127.0.0.1:9888` in your browser. 
+​	Then, enter `http://127.0.0.1:9888/login` in your browser. 
 
